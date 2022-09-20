@@ -14,10 +14,25 @@ def press(n):
 	equation.set(expression)
 
 def equal():
+	try:
+		global expression
+		total = str(eval(expression))
+		equation.set(total)
+		exression=''
+	except: 
+		equation.set('Error')
+		expression=''
+
+
+def clear(): 
 	global expression
-	total = str(eval(expression))
-	equation.set(total)
-	exression=''
+	expression=''
+	equation.set('0')
+
+def backspace():
+	global expression
+	expression = expression.rstrip(expression[-1])
+	equation.set(expression)
 
 expression_frame = Frame(window, bg="#cadce8")
 buttons_frame = Frame(window, bg='#edf5f5')
@@ -48,10 +63,10 @@ button9 = Button(buttons_frame, text='9', font=font_button, relief='groove', bg=
 multiply= Button(buttons_frame, text='x', font=font_button, relief='groove', bg='#ffffff', borderwidth=1, width=8, height=3, command=lambda: press('*'))
 button0 = Button(buttons_frame, text='0', font=font_button, relief='groove', bg='#ffffff', borderwidth=1, width=8, height=3, command=lambda: press(0))
 decimal = Button(buttons_frame, text='.', font=font_button, relief='groove', bg='#ffffff', borderwidth=1, width=8, height=3, command=lambda: press('.'))
-clear = Button(buttons_frame, text='Clear', font=font_button, relief='groove', bg='#ffffff', borderwidth=1, width=8, height=3)
+clear = Button(buttons_frame, text='Clear', font=font_button, relief='groove', bg='#ffffff', borderwidth=1, width=8, height=3, command =clear)
 divide = Button(buttons_frame, text='÷', font=font_button, relief='groove', bg='#ffffff', borderwidth=1, width=8, height=3, command=lambda: press('/'))
 equal = Button(buttons_frame, text='=', font=font_button, relief='groove', bg='#ffffff', borderwidth=1, width=8, height=3, command=equal)
-backspace = Button(buttons_frame, text='⌫', font=font_button, relief='groove', bg='#ffffff', borderwidth=1, width=8, height=3)
+backspace = Button(buttons_frame, text='⌫', font=font_button, relief='groove', bg='#ffffff', borderwidth=1, width=8, height=3, command=backspace)
 
 
 #Positioning buttons on the calculator
